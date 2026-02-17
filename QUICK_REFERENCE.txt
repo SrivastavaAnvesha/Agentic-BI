@@ -1,0 +1,185 @@
+"""
+QUICK REFERENCE CARD - Copy this to your clipboard!
+"""
+
+╔════════════════════════════════════════════════════════════════╗
+║           AGENTIC BI - QUICK REFERENCE                        ║
+╚════════════════════════════════════════════════════════════════╝
+
+📍 YOUR SITUATION:
+├─ ❌ 429 RESOURCE_EXHAUSTED on gemini-2.0-flash
+├─ ❌ 404 NOT_FOUND on gemini-1.5-flash, gemini-1.0-pro
+└─ ❓ Should I switch libraries?
+
+✅ THE ANSWER:
+├─ NO - Don't switch libraries
+├─ YES - Run list_models.py to find available models
+└─ YES - Use retry logic (provided) to handle rate limits
+
+════════════════════════════════════════════════════════════════
+
+🚀 IMMEDIATE ACTION (Do This Now):
+
+1. Open terminal and run:
+   python list_models.py
+
+2. Find a model that says "available" (look for names like):
+   - gemini-2.0-flash-exp ← Most likely
+   - gemini-1.5-flash
+   - gemini-pro
+   - models/gemini-1.5-flash
+
+3. Copy that model name
+
+4. Edit brain.py line 25:
+   GEMINI_MODEL = "paste_model_name_here"
+
+5. Test:
+   python brain.py
+
+════════════════════════════════════════════════════════════════
+
+💡 KEY FILES:
+
+brain.py              Main AI module (UPDATED)
+├─ ask_ai_about_data()      Ask questions about data
+├─ ask_ai_generate_sql()    Generate & execute SQL
+└─ test_connection()        Validate setup
+
+list_models.py        Model discovery (NEW)
+rate_limiter.py       Retry logic (NEW)
+examples.py           Usage patterns (NEW)
+README_SOLUTION.md    Full guide (NEW)
+
+════════════════════════════════════════════════════════════════
+
+⚡ QUICK CODE:
+
+# Most basic usage:
+from brain import ask_ai_about_data
+answer = ask_ai_about_data("What's our revenue?")
+print(answer)
+
+# With automatic retries:
+from brain import ask_ai_about_data
+from rate_limiter import retry_with_backoff
+
+@retry_with_backoff(max_retries=5)
+def safe_query(q):
+    return ask_ai_about_data(q)
+
+answer = safe_query("Top products?")
+print(answer)
+
+════════════════════════════════════════════════════════════════
+
+🔧 ERROR SOLUTIONS:
+
+Error: 429 RESOURCE_EXHAUSTED
+→ Solution: Wait 1-2 hours (free tier limit)
+→ Temporary: Use @retry_with_backoff decorator
+
+Error: 404 NOT_FOUND
+→ Solution: Run python list_models.py
+→ Update GEMINI_MODEL in brain.py with available model
+
+Error: GOOGLE_API_KEY not found
+→ Solution: Add to .env: GOOGLE_API_KEY=your_key
+
+Error: PostgreSQL connection failed
+→ Solution: Start PostgreSQL service
+
+════════════════════════════════════════════════════════════════
+
+📊 FREE TIER LIMITS:
+
+Rate: ~60 requests/minute
+Quota: Daily limit (resets daily)
+To avoid hitting limits:
+├─ Add time.sleep(1) between requests
+├─ Use retry_with_backoff decorator
+├─ Cache responses (@lru_cache)
+└─ Test during off-peak hours
+
+════════════════════════════════════════════════════════════════
+
+📚 FILE READING ORDER:
+
+For quick start:
+1. README_SOLUTION.md (overview)
+2. examples.py (how to use)
+
+For troubleshooting:
+1. TROUBLESHOOTING.md (detailed guide)
+2. examples.py (reference patterns)
+
+For deep dive:
+1. All markdown files
+2. Read code comments in brain.py
+
+════════════════════════════════════════════════════════════════
+
+✅ LIBRARY RECOMMENDATION:
+
+Q: Should I switch to google-generativeai (old library)?
+A: NO - Here's why:
+
+✗ Same rate limits as google-genai
+✗ Same 429 errors on free tier
+✗ Same 404 errors for unavailable models
+✓ google-genai is newer and better supported
+✓ Keep google-genai, use retry logic instead
+
+════════════════════════════════════════════════════════════════
+
+🎯 SUCCESS CRITERIA:
+
+You'll know it's working when:
+├─ ✓ python list_models.py shows available models
+├─ ✓ python brain.py passes all connection tests
+├─ ✓ ask_ai_about_data("test") returns an answer
+└─ ✓ No 404 errors in responses
+
+════════════════════════════════════════════════════════════════
+
+💬 SUPPORT DECISION TREE:
+
+Issue with 429?
+├─ Free tier rate limit → Wait 1-2 hours
+└─ Add retry logic → Use @retry_with_backoff
+
+Issue with 404?
+├─ Model unavailable → Run list_models.py
+└─ Use different model → Update GEMINI_MODEL
+
+Issue with connection?
+├─ API key → Check .env file
+└─ Database → Start PostgreSQL
+
+Still stuck?
+└─ Read TROUBLESHOOTING.md
+
+════════════════════════════════════════════════════════════════
+
+🚀 NEXT COMMANDS TO RUN:
+
+# In this order:
+python list_models.py          # Find what works
+# Then update brain.py
+python brain.py                # Test everything
+python examples.py             # See usage patterns
+
+════════════════════════════════════════════════════════════════
+
+📞 IMPORTANT REMINDERS:
+
+⚠️ Free tier has daily quotas (not hourly)
+⚠️ Some models may be region-locked
+⚠️ Batch requests to maximize quota
+⚠️ Cache responses when possible
+⚠️ Don't hardcode API keys in code
+
+════════════════════════════════════════════════════════════════
+
+That's it! You're ready to go. Run list_models.py first! 🚀
+"""

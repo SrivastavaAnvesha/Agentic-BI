@@ -1,0 +1,8 @@
+order_id,order_date,product_name,category,sales_amount,region,customer_type
+101,2024-01-01,Laptop,Electronics,75000,North,Corporate
+102,2024-01-02,Mouse,Electronics,1500,South,Home Office
+103,2024-01-03,Office Chair,Furniture,12000,West,Corporate
+104,2024-01-04,Smart Phone,Electronics,45000,North,Consumer
+105,2024-01-05,Desk Lamp,Furniture,2500,East,Consumer
+106,2024-01-06,Keyboard,Electronics,3000,South,Home Office
+107,2024-01-07,Monitor,Electronics,15000,West,Corporate
